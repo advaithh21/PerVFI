@@ -22,6 +22,7 @@ def build_model(name, device="cuda"):
         # e.g., RAFT+PerVFI
         ofnet = name.split("+")[0]
         ofnet = None if ofnet == "none" else ofnet
+        print(ckpt)
 
         model = Pipeline_infer(ofnet, "v00", model_file=ckpt)
 
