@@ -18,7 +18,7 @@ def build_model(name, device="cuda"):
     elif "pervfi" in name.lower():
         from models.pipeline import Pipeline_infer
 
-        ckpt = "checkpoints/PerVFI/v00.pth"
+        ckpt = "/kaggle/input/v00-pretrained/v00.pth"
         # e.g., RAFT+PerVFI
         ofnet = name.split("+")[0]
         ofnet = None if ofnet == "none" else ofnet
