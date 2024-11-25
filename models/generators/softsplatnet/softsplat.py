@@ -254,12 +254,20 @@ def cuda_launch(strKey: str):
         os.environ['CUDA_HOME'] = cupy.cuda.get_cuda_path()
     # end
 
-    return cupy.cuda.compile_with_cache(
-        objCudacache[strKey]['strKernel'],
-        tuple([
-            '-I ' + os.environ['CUDA_HOME'],
-            '-I ' + os.environ['CUDA_HOME'] + '/include'
-        ])).get_function(objCudacache[strKey]['strFunction'])
+    kernel_code = objCudacache[strKey]['strKernel']  # Retrieve the CUDA kernel code
+    kernel_function_name = objCudacache[strKey]['strFunction']  # Retrieve the kernel function name
+
+    # Include paths for compilation
+    include_paths = [
+        '-I' + os.environ['CUDA_HOME'],
+        '-I' + os.environ['CUDA_HOME'] + '/include'
+    ]
+
+    # Compile the kernel
+    compiled_kernel = cupy.RawKernel(kernel_code, kernel_function_name, options=include_paths)
+
+    # Return the compiled kernel
+    return compiled_kernel
 
 
 # end
