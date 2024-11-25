@@ -127,6 +127,7 @@ def build_flow_estimator(name, device="cuda"):
             num_transformer_layers=6,
         )
         ckpt = "/kaggle/input/gmflowpretrained/gmflow_sintel-0c07dcb3.pth"
+        print(ckpt)
         model.load_state_dict(torch.load(ckpt)["model"])
         model.to(device).eval()
 
