@@ -95,7 +95,7 @@ for vid_name in tqdm(videos):
     sequences = [
         x for x in os.listdir(osp.join(dstDir, vid_name)) if ".jpg" in x or ".png" in x
     ]
-    sequences.sort(key=lambda x: int(x[5:-4]))  # NOTE: This might cause some BUG!
+    sequences.sort(key=lambda x: int(x[0:-4]))  # NOTE: This might cause some BUG!
     sequences = [osp.join(dstDir, vid_name, x) for x in sequences]
 
     ############ build buffer with multi-threads ############
